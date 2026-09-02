@@ -25,7 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.carbajal.lab03registroproducto.ui.theme.Lab03RegistroProductoTheme
 import androidx.compose.foundation.layout.Row
-
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Button
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 @Composable
 fun PantallaRegistro(modifier: Modifier = Modifier) {
     // Declaración de variables de estado
@@ -73,6 +74,7 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
             label = { Text("Nombre del producto") },
             modifier = Modifier.fillMaxWidth()
         )
+
         Spacer(modifier = Modifier.height(16.dp))
 
         // Fila compartida para Precio y Cantidad usando weight(1f)
@@ -89,9 +91,49 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
             OutlinedTextField(
                 value = cantidad,
                 onValueChange = { cantidad = it },
-                label = {Text("Cantidad") },
+                label = { Text("Cantidad") },
                 modifier = Modifier.weight(1f)
             )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Botón de acción
+        Button(
+            onClick = { mostrarResumen = true },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("AGREGAR PRODUCTO")
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Card de resumen condicional
+        if (mostrarResumen) {
+            val precioNum = precio.toDoubleOrNull() ?: 0.0
+            val cantidadNum = cantidad.toIntOrNull() ?: 0
+            val importe = precioNum * cantidadNum
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                )
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = nombre,
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                    Text("Precio: S/ ${String.format("%.2f", precioNum)}")
+                    Text("Cantidad: $cantidadNum")
+                    Text(
+                        text = "Importe total: S/ ${String.format("%.2f", importe)}",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
         }
     }
 }
