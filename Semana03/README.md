@@ -1,24 +1,18 @@
 # Lab 03: Registro de Producto
 
-Estudiante: Meliton Carbajal  
-## Curso: Programación en Móviles  
+ Estudiante: Meliton Carbajal  
+#### Curso: Programación en Móviles  
 
----
-
-## Descripción
+**Descripción**
 Aplicación desarrollada en Jetpack Compose para el registro de productos. Permite ingresar el nombre, precio y cantidad, gestionando el estado con remember  y mutableStateOf para calcular el importe total y mostrar una tarjeta de resumen.
 
----
 
 ## Capturas de Pantalla
 
-| Pantalla Inicial | Producto Registrado |
-| :---: | :---: |
-| ![Inicial](<img width="1361" height="716" alt="Captura de pantalla 2026-09-02 a las 5 15 42 p  m" src="https://github.com/user-attachments/assets/f0b2ca2b-a78d-4d38-ac96-ec0808b07971" />
-) | ![Registrado]( <img width="1324" height="669" alt="Captura de pantalla 2026-09-02 a las 5 23 11 p  m" src="https://github.com/user-attachments/assets/265f2dce-9309-4134-bd6c-7b3eddfe434e" />
-) |
-
----
+**Pantalla Inicial**
+<img width="1361" height="716" alt="Captura de pantalla 2026-09-02 a las 5 15 42 p  m" src="https://github.com/user-attachments/assets/f0b2ca2b-a78d-4d38-ac96-ec0808b07971" />
+**Producto Registrado**
+ <img width="1324" height="669" alt="Captura de pantalla 2026-09-02 a las 5 23 11 p  m" src="https://github.com/user-attachments/assets/265f2dce-9309-4134-bd6c-7b3eddfe434e" />
 
 ## Pregunta de Reflexión
 
