@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,6 +34,18 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Alignment
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.ui.draw.clip
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,18 +126,112 @@ fun visualizacionPantalla(modifier: Modifier = Modifier){
                     text = "Desliza para asignar cada nota (0 a 20)",
                     fontSize = 12.sp, color = Color.Gray
                 )
+                // Controles Slider por Curso
+                CursoItem("Fundamentos de Programación", 20, nota1) { nota1 = it }
+                CursoItem("Programación Orientada a Objetos", 25, nota2) { nota2 = it }
+                CursoItem("Programación en Móviles", 30, nota3) { nota3 = it }
+                CursoItem("Base de Datos", 25, nota4) { nota4 = it }
+
             }
 
 
         }
-
-
-
-
-
-
-
     }
 
 
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CursoItem(
+    nombre: String,
+    peso: Int,
+    nota: Float,
+    onNotaChange: (Float) -> Unit
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+
+    Column(
+        modifier = Modifier.padding(vertical = 10.dp)
+    ) {
+
+        // Nombre y porcentaje
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = nombre,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    color = Color(0xFF2D2D2D)
+                )
+
+                Spacer(modifier = Modifier.width(4.dp))
+
+                Text(
+                    text = "($peso%)",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF8E24AA)
+                )
+            }
+
+            // Badge de nota
+            Surface(
+                color = Color(0xFFEDE7F6),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text(
+                    text = nota.toInt().toString(),
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                    color = Color(0xFF5E4B8B),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 13.sp
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(6.dp))
+
+        // Slider
+        Slider(
+            value = nota,
+            onValueChange = onNotaChange,
+            valueRange = 0f..20f,
+            steps = 19,
+
+            // CÍRCULO MORADO PERSONALIZADO
+            thumb = {
+                Box(
+                    modifier = Modifier
+                        .size(30.dp)                  // Tamaño del círculo
+                        .clip(CircleShape)
+                        .background(Color(0xFF5E4B8B))
+                )
+            },
+            // LÍNEA DEL SLIDER
+            track = { sliderState ->
+                SliderDefaults.Track(
+                    sliderState = sliderState,
+                    thumbTrackGapSize = 0.dp,
+                    trackInsideCornerSize = 3.dp,
+                    colors = SliderDefaults.colors(
+                        activeTrackColor = Color(0xFFD0BCFF),
+                        inactiveTrackColor = Color(0xFFE7E0EC),
+                        activeTickColor = Color.Transparent,
+                        inactiveTickColor = Color.Transparent
+                    )
+                )
+            },
+
+            colors = SliderDefaults.colors(
+                thumbColor = Color.Transparent // Oculta el thumb por defecto
+            ),
+
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }
