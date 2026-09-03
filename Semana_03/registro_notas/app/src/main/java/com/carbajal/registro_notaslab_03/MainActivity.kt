@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -24,6 +25,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.carbajal.registro_notaslab_03.ui.theme.Registro_notasLab_03Theme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -74,7 +80,6 @@ fun visualizacionPantalla(modifier: Modifier = Modifier){
                 )
             )
     ) {
-
         //Encabezado principal
         Box(
             modifier = Modifier.fillMaxWidth().padding(vertical =  16.dp, horizontal = 20.dp))
@@ -85,6 +90,40 @@ fun visualizacionPantalla(modifier: Modifier = Modifier){
 
             )
         }
+        //Tarjeta principal de la App
+        Card(
+            modifier = Modifier
+                .fillMaxSize(),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFEDE7F6))
+
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Text(
+                    text = "Notas del Ciclo",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+
+                )
+                Text(
+                    text = "Desliza para asignar cada nota (0 a 20)",
+                    fontSize = 12.sp, color = Color.Gray
+                )
+            }
+
+
+        }
+
+
+
+
+
+
+
     }
 
 
