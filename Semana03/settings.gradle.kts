@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "multas_sem03_tarea"
+rootProject.name = "Lab03RegistroProducto"
 include(":app")
  

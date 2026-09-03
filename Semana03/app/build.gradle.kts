@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.carbajal.multas_sem03_tarea"
+    namespace = "com.carbajal.lab03registroproducto"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.carbajal.multas_sem03_tarea"
+        applicationId = "com.carbajal.lab03registroproducto"
         minSdk = 24
         targetSdk = 37
         versionCode = 1
