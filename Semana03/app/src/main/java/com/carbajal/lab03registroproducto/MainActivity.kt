@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -61,14 +62,15 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
         // Encabezado con jerarquía tipográfica
         Text(
             text = "Nuevo producto",
-            style = MaterialTheme.typography.headlineSmall
+            style = MaterialTheme.typography.headlineSmall,
+            color = Color.Blue
+
         )
         Text(
-            text = "Completa los datos y presiona Agregar",
+            text = "Completa los datos correctamente y presiona Agregar",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.outline
         )
-
         Spacer(modifier = Modifier.height(24.dp))
 
         // Campo de entrada para Nombre
@@ -100,7 +102,6 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
         }
 
         Spacer(modifier = Modifier.height(24.dp))
-
         // Botones de acción
         Row(modifier = Modifier.fillMaxWidth()) {
             Button(
@@ -115,11 +116,13 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
                         mostrarResumen = true
                     }
                 },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF4CAF50) //Agrege el valor del color Verde
+                )
             ) {
                 Text("AGREGAR")
             }
-
             Spacer(modifier = Modifier.width(16.dp))
 
             OutlinedButton(
@@ -130,7 +133,10 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
                     errorMsg = ""
                     mostrarResumen = false
                 },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Blue
+                )
             ) {
                 Text("LIMPIAR")
             }
@@ -146,7 +152,6 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.bodyMedium
             )
         }
-
         // Card de resumen condicional
         if (mostrarResumen) {
             val precioNum = precio.toDoubleOrNull() ?: 0.0
@@ -173,7 +178,6 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
                     )
                 }
             }
-
             Spacer(modifier = Modifier.height(8.dp))
             // Mensaje de confirmación verde
             Text(
