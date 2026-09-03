@@ -19,3 +19,5 @@ Aplicación desarrollada en Jetpack Compose para el registro de productos. Permi
 **¿Qué pasaría si declaras las variables de los campos SIN remember?**
 
 Si se declaran las variables del estado sin remember, el valor de la variable se reconfigura e inicializa nuevamente en su estado original en cada recomposición de la pantalla. En la práctica, esto provoca que cada vez que el usuario intenta escribir una letra en el campo de texto, el valor introducido se borre al instante y la interfaz sea incapaz de conservar lo escrito."
+
+
