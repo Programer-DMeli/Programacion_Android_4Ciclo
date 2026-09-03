@@ -46,6 +46,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.draw.clip
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Checkbox
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,8 +135,29 @@ fun visualizacionPantalla(modifier: Modifier = Modifier){
                 CursoItem("Base de Datos", 25, nota4) { nota4 = it }
 
             }
-
-
+            // Switch Redondear
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = "Redondear promedio final", color = Color.DarkGray)
+                Switch(
+                    checked = redondear,
+                    onCheckedChange = { redondear = it }
+                )
+            }
+            // Checkbox Confirmación
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Checkbox(
+                        checked = confirmado,
+                        onCheckedChange = { confirmado = it }
+                    )
+                    Text(text = "Confirmo que las notas son correctas", fontSize = 14.sp)
+                }
         }
     }
 
