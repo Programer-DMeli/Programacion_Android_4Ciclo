@@ -75,8 +75,18 @@ fun PantallaCarrito() {
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-
-        // Verificación temporal para el Commit 2
-        Text(text = "Productos registrados: ${productos.size}")
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(productos) { producto ->
+                TarjetaProducto(
+                    producto = producto,
+                    onEliminar = { productos.remove(producto) }
+                )
+            }
+        }
     }
 }

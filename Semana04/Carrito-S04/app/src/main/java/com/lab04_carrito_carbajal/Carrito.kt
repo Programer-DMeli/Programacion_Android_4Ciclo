@@ -1,6 +1,5 @@
 package com.lab04_carrito_carbajal
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -12,8 +11,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import java.util.Locale
-
-
 
 data class Producto(
     val nombre: String,
@@ -40,7 +37,6 @@ fun TarjetaProducto(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Columna con peso para tomar todo el espacio izquierdo
             Column(
                 modifier = Modifier.weight(1f)
             ) {
@@ -50,13 +46,12 @@ fun TarjetaProducto(
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = String.format(Locale.US, "S/ %.2f  x %d", producto.precio, producto.cantidad),
+                    text = String.format(Locale.US, "S/ %.2f x %d", producto.precio, producto.cantidad),
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.Gray
                 )
             }
 
-            // Importe del producto
             Text(
                 text = String.format(Locale.US, "S/ %.2f", producto.importe),
                 style = MaterialTheme.typography.titleMedium,
@@ -65,11 +60,10 @@ fun TarjetaProducto(
                 modifier = Modifier.padding(end = 8.dp)
             )
 
-            // Botón Eliminar
             IconButton(onClick = onEliminar) {
                 Icon(
                     imageVector = Icons.Default.Delete,
-                    contentDescription = "Eliminar producto",
+                    contentDescription = "Eliminar",
                     tint = MaterialTheme.colorScheme.error
                 )
             }
