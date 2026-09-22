@@ -19,11 +19,11 @@ fun AppNavigation(){
         //Esto es la logica para mostrar la primera pantalla de la App
         navController = navController,
         startDestination = Screen.Home.route  //Ruta por defecto para abrir la app
-    ){
+    ) {
 
         //usamos la funcion composable para registrar cada pantalla en la ruta
 
-        composable(Screen.Home.route){
+        composable(Screen.Home.route) {
             HomeScreen(navController)
         }
         //cuando se llama a NavController.navigate(listScreen), el NavController busca listScreen dentro de estas rutas que llevan una logica de NavGrap
@@ -35,6 +35,20 @@ fun AppNavigation(){
         composable(Screen.Profile.route) {
             ProfileScreen(navController)
         }
-        //Rutas con argumento tipado
+        //Rutas con argumento tipado es una direccion dentro del mapa de navegacion con datos especificos
+
+        composable(
+            route = Screen.Detail.route,
+            arguments = listOf(
+                navArgument("itemId") {
+                    type = NavType.IntType
+                    defaultValue = 0
+                }
+            )
+        ) { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getInt("itemId") ?: 0
+            DetailScreen(navController, itemId)
+
+        }
     }
 }
