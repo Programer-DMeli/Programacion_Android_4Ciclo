@@ -13,9 +13,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -49,6 +51,7 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
     var nombre by remember { mutableStateOf("") }
     var precio by remember { mutableStateOf("") }
     var cantidad by remember { mutableStateOf("") }
+    var errorMsg by remember { mutableStateOf("") }
     var mostrarResumen by remember { mutableStateOf(false) }
 
     Column(
@@ -59,14 +62,15 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
         // Encabezado con jerarquía tipográfica
         Text(
             text = "Nuevo producto",
-            style = MaterialTheme.typography.headlineSmall
+            style = MaterialTheme.typography.headlineSmall,
+            color = Color.Blue
+
         )
         Text(
-            text = "Completa los datos y presiona Agregar",
+            text = "Completa los datos correctamente y presiona Agregar",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.outline
         )
-
         Spacer(modifier = Modifier.height(24.dp))
 
         // Campo de entrada para Nombre
@@ -87,7 +91,6 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
                 label = { Text("Precio (S/)") },
                 modifier = Modifier.weight(1f)
             )
-
             Spacer(modifier = Modifier.width(16.dp))
 
             OutlinedTextField(
@@ -99,17 +102,55 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
         }
 
         Spacer(modifier = Modifier.height(24.dp))
+        // Botones de acción
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Button(
+                onClick = {
+                    val p = precio.toDoubleOrNull()
+                    val c = cantidad.toIntOrNull()
+                    if (nombre.isBlank() || p == null || c == null) {
+                        errorMsg = "Error: Todos los campos son obligatorios y deben ser válidos."
+                        mostrarResumen = false
+                    } else {
+                        errorMsg = ""
+                        mostrarResumen = true
+                    }
+                },
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF4CAF50) //Agrege el valor del color Verde
+                )
+            ) {
+                Text("AGREGAR")
+            }
+            Spacer(modifier = Modifier.width(16.dp))
 
-        // Botón de acción
-        Button(
-            onClick = { mostrarResumen = true },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("AGREGAR PRODUCTO")
+            OutlinedButton(
+                onClick = {
+                    nombre = ""
+                    precio = ""
+                    cantidad = ""
+                    errorMsg = ""
+                    mostrarResumen = false
+                },
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Blue
+                )
+            ) {
+                Text("LIMPIAR")
+            }
         }
-
         Spacer(modifier = Modifier.height(24.dp))
 
+        // Mensaje de error
+        if (errorMsg.isNotEmpty()) {
+            Text(
+                text = errorMsg,
+                color = Color.Red,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
         // Card de resumen condicional
         if (mostrarResumen) {
             val precioNum = precio.toDoubleOrNull() ?: 0.0
@@ -136,7 +177,6 @@ fun PantallaRegistro(modifier: Modifier = Modifier) {
                     )
                 }
             }
-
             Spacer(modifier = Modifier.height(8.dp))
             // Mensaje de confirmación verde
             Text(
