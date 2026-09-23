@@ -21,9 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.clinicasalud.app.data.Doctor
-import com.clinicasalud.app.data.DoctorRepository
-import com.clinicasalud.app.ui.theme.*
+import com.carbajal.appclinica.data.Doctor
+import com.carbajal.appclinica.data.DoctorRepository
+import com.carbajal.appclinica.ui.theme.*
 
 @Composable
 fun HomeScreen(

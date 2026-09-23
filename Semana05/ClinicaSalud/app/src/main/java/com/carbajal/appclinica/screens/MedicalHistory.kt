@@ -11,7 +11,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.carbajal.appclinica.ui.theme.SaludTextSecondary
-import com.clinicasalud.app.ui.theme.SaludTextSecondary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

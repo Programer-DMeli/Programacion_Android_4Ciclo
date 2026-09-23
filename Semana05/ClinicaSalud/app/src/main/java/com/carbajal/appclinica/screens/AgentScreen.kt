@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import  com.carbajal.appclinica.ui.theme*
+import com.carbajal.appclinica.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,7 +45,7 @@ fun BookAppointmentScreen(
         ) {
             Text(
                 text = "Selecciona fecha",
-                fontSize = 14.sp,
+                fontSize = 15.sp,
                 color = SaludTextSecondary,
                 fontWeight = FontWeight.Medium
             )
