@@ -10,40 +10,40 @@
 
 **Clínica Salud+** es una aplicación móvil nativa para Android desarrollada en **Jetpack Compose** que integra todos los conocimientos adquiridos entre las semanas 1 y 6. La aplicación ofrece un flujo intuitivo y moderno para la consulta de médicos especialistas, agendamiento de citas médicas y revisión de historial.
 
-El desarrollo se enfoca en el uso exclusivo de **estado local** (`remember` / `mutableStateOf`) sin arquitectura MVVM[cite: 2], combinado con un sistema de navegación dual: **navegación secuencial** por parámetros tipo-seguros (`NavHost`) y **navegación secundaria** mediante un menú lateral deslizante (`ModalNavigationDrawer`)[cite: 2].
+El desarrollo se enfoca en el uso exclusivo de **estado local**, combinado con un sistema de navegación dual: **navegación secuencial** por parámetros tipo-seguros (`NavHost`) y **navegación secundaria** mediante un menú lateral deslizante
 
 ---
 
 ## ⚙️ Requisitos Funcionales — Opción A
 
-La aplicación en su etapa funcional permite realizar las siguientes acciones a través de sus 6 pantallas integradas[cite: 2]:
+La aplicación en su etapa funcional permite realizar las siguientes acciones a través de sus 6 pantallas integradas:
 
-### 1. Pantalla de Inicio (`HomeScreen`)
-* **Navegación Secundaria:** Botón de menú hamburguesa (☰) en el banner superior para desplegar el `ModalNavigationDrawer`[cite: 2].
-* **Filtro de Especialidades:** `LazyRow` interactivo con chips de selección ("Cardiología", "Pediatría", "Dermatología")[cite: 2].
-* **Lista de Médicos Disponibles:** `LazyColumn` que renderiza tarjetas de médicos con su nombre, especialidad y calificación promedio (estrellas)[cite: 2].
+### 1. Pantalla de Inicio
+* **Navegación Secundaria:** Botón de menú hamburguesa (☰) en el banner superior para desplegar el `ModalNavigationDrawer`.
+* **Filtro de Especialidades:** `LazyRow` interactivo con chips de selección ("Cardiología", "Pediatría", "Dermatología")
+* **Lista de Médicos Disponibles:** `LazyColumn` que renderiza tarjetas de médicos con su nombre, especialidad y calificación promedio (estrellas).
 
-### 2. Perfil del Médico (`DoctorDetailScreen`)
-* **Recepción de Parámetros:** Obtiene de forma dinámica el ID del médico seleccionado a través de la ruta de navegación[cite: 2].
-* **Detalle del Profesional:** Muestra avatar, años de experiencia, total de reseñas y biografía médica.
-* **Acción Principal:** Botón destacado "Agendar cita" que redirige al flujo de reserva[cite: 2].
+### 2. Perfil del Médico
+* **Recepción de Parámetros:** Obtiene de forma dinámica el ID del médico seleccionado a través de la ruta de navegación.
+* **Detalle del Profesional:** Muestra Icono, años de experiencia, total de reseñas y biografía médica.
+* **Acción Principal:** Botón destacado "Agendar cita" que redirige al flujo de reserva.
 
-### 3. Agendar Cita (`BookAppointmentScreen`)
-* **Selección Única de Fecha:** Panel con 3 opciones de fechas (ej. Jue 25, Vie 27, Sáb 20) que actúa bajo lógica de selección exclusiva[cite: 2].
-* **Selección Única de Hora:** Panel con 3 opciones de horarios (ej. 9:00, 10:30, 3:00) de selección única[cite: 2].
-* **Confirmación de Selección:** Botón para procesar el agendamiento con los datos seleccionados[cite: 2].
+### 3. Agendar Cita 
+* **Selección Única de Fecha:** Panel con 3 opciones de fechas (ej. Jue 25, Vie 27, Sáb 20) que actúa bajo lógica de selección exclusiva.
+* **Selección Única de Hora:** Panel con 3 opciones de horarios (ej. 9:00, 10:30, 3:00) de selección única.
+* **Confirmación de Selección:** Botón para procesar el agendamiento con los datos seleccionados.
 
-### 4. Confirmación de Cita (`ConfirmationScreen`)
-* **Resumen de Cita:** Muestra un diseño de éxito con ícono de verificación (check verde), indicando el médico, la fecha y la hora elegidas[cite: 2].
-* **Retorno Funcional:** Botón "Ver mis citas" para redirige al usuario a su listado general[cite: 2].
+### 4. Confirmación de Cita 
+* **Resumen de Cita:** Muestra un diseño de éxito con ícono de verificación (check verde), indicando el médico, la fecha y la hora elegidas.
+* **Retorno Funcional:** Botón "Ver mis citas" para redirige al usuario a su listado general.
 
-### 5. Mis Citas (`MyAppointmentsScreen`)
-* **Acceso desde Drawer:** Accesible en cualquier momento desde el menú lateral[cite: 2].
-* **Listado de Citas:** `LazyColumn` con las citas del usuario[cite: 2].
-* **Diferenciación Visual de Estado:** Badges e indicadores laterales de color para diferenciar citas **Confirmadas** (Púrpura) y **Completadas** (Gris)[cite: 2].
+### 5. Mis Citas
+* **Acceso desde Drawer:** Accesible en cualquier momento desde el menú lateral
+* **Listado de Citas:** `LazyColumn` con las citas del usuario.
+* **Diferenciación Visual de Estado:** Badges e indicadores laterales de color para diferenciar citas **Confirmadas** (Púrpura) y **Completadas**.
 
-### 6. Historial Médico (`MedicalHistoryScreen`)
-* **Acceso desde Drawer:** Destino secundario para consulta de registros médicos anteriores[cite: 2].
+### 6. Historial Médico 
+* **Acceso desde Drawer:** Destino secundario para consulta de registros médicos anteriore.
 
 ---
 **Promt Usados**
@@ -57,8 +57,15 @@ Punto 3.- Utiliza NavHost, NavController y el componente de navegación M3 adecu
 
 ---
 
+## 📱 Evidencias del Resultado
 
-**Evidencias**
+| 1. Inicio | 2. Perfil del Médico | 3. Agendar Cita |
+| :---: | :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/cf2297ce-2a13-40bd-aac1-7f3a574cd7a5" width="220" alt="Inicio" /> | <img src="https://github.com/user-attachments/assets/34b8c5b2-0805-4643-8fdf-494881ca9b5b" width="220" alt="Perfil del Médico" /> | <img src="https://github.com/user-attachments/assets/ca778872-29fc-4571-93ac-842b13a1559c" width="220" alt="Agendar Cita" /> |
+
+| 4. Confirmación | 5. Mis Citas | 6. Historial Médico |
+| :---: | :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/99b3e317-f512-4b02-a423-c1692e5c17ec" width="220" alt="Confirmación" /> | <img src="https://github.com/user-attachments/assets/68c7e5ca-0f0b-4a46-83df-41bf12ba2825" width="220" alt="Mis Citas" /> | <img src="https://github.com/user-attachments/assets/1cfd3b91-bd4f-4a19-92b3-465fa8702948" width="220" alt="Historial Médico" /> |
 
 ---
 
@@ -79,8 +86,8 @@ com.clinicasalud.app/
 │   └── screens/
 │       ├── HomeScreen.kt             # Inicio (Filtros + Lista de Médicos)
 │       ├── DoctorDetailScreen.kt     # Perfil de Médico
-│       ├── BookAppointmentScreen.kt  # Agendamiento (Fecha y Hora)
+│       ├── AgendaScreen.kt  # Agendamiento (Fecha y Hora)
 │       ├── ConfirmationScreen.kt     # Pantalla de Confirmación
-│       ├── MyAppointmentsScreen.kt   # Mis Citas (Estado Confirmada/Completada)
+│       ├── CitasScreen.kt   # Mis Citas (Estado Confirmada/Completada)
 │       └── MedicalHistoryScreen.kt   # Historial Médico
 └── MainActivity.kt             # Punto de entrada de la aplicación
