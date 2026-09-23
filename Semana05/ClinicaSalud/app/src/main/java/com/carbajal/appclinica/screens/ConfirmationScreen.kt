@@ -66,7 +66,6 @@ fun ConfirmationScreen(
             fontSize = 15.sp,
             color = SaludTextSecondary
         )
-
         Text(
             text = "Viernes $date, $time am",
             fontSize = 14.sp,
