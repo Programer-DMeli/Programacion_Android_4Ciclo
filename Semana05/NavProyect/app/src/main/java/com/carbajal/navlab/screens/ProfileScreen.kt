@@ -44,6 +44,27 @@ fun ProfileScreen(onBack: () -> Unit, onLogout: () -> Unit) {
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = SurfaceWhite)
             )
         },
+        bottomBar = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 16.dp)
+            ) {
+                Button(
+                    onClick = onLogout,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = LogoutRedBg),
+                    elevation = ButtonDefaults.buttonElevation(0.dp)
+                ) {
+                    Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null, tint = LogoutRed)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Cerrar Sesión", color = LogoutRed, fontWeight = FontWeight.Bold)
+                }
+            }
+        },
         containerColor = SurfaceWhite
     ) { paddingValues ->
         Column(
@@ -101,22 +122,7 @@ fun ProfileScreen(onBack: () -> Unit, onLogout: () -> Unit) {
                 ProfileItemRow(Icons.Default.School, "Carrera", "Ingeniería de Software")
                 ProfileItemRow(Icons.Default.CalendarToday, "Ciclo Actual", "VI Ciclo")
 
-                Spacer(modifier = Modifier.height(32.dp))
-
-                Button(
-                    onClick = onLogout,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = LogoutRedBg),
-                    elevation = ButtonDefaults.buttonElevation(0.dp)
-                ) {
-                    Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null, tint = LogoutRed)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("Cerrar Sesión", color = LogoutRed, fontWeight = FontWeight.Bold)
-                }
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(24.dp))
             }
         }
     }
