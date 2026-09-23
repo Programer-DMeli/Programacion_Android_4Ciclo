@@ -42,49 +42,51 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .fillMaxWidth()
                 .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = "Bienvenido,\nMeliton Carbajal",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                lineHeight = 36.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp)
-            )
-            Text(
-                text = "¿Qué deseas gestionar hoy?",
-                fontSize = 16.sp,
-                color = Color.White.copy(alpha = 0.8f),
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 40.dp)
-            )
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Bienvenido,\nMeliton Carbajal",
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    lineHeight = 36.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp)
+                )
+                Text(
+                    text = "¿Qué deseas gestionar hoy?",
+                    fontSize = 16.sp,
+                    color = Color.White.copy(alpha = 0.8f),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 40.dp)
+                )
 
-            MenuCard(
-                title = "Directorio de Alumnos",
-                subtitle = "Ver y gestionar estudiantes",
-                icon = Icons.Default.Group,
-                onClick = onNavigateDirectory
-            )
+                MenuCard(
+                    title = "Directorio de Alumnos",
+                    subtitle = "Ver y gestionar estudiantes",
+                    icon = Icons.Default.Group,
+                    onClick = onNavigateDirectory
+                )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            MenuCard(
-                title = "Mi Perfil Académico",
-                subtitle = "Datos personales y progreso",
-                icon = Icons.Default.Person,
-                onClick = onNavigateProfile
-            )
-
-            Spacer(modifier = Modifier.height(32.dp))
+                MenuCard(
+                    title = "Mi Perfil Académico",
+                    subtitle = "Datos personales y progreso",
+                    icon = Icons.Default.Person,
+                    onClick = onNavigateProfile
+                )
+            }
 
             TextButton(
                 onClick = onLogout,
