@@ -8,6 +8,12 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Alignment
+
 
 @Composable
 fun ContenidoDrawer(
@@ -16,6 +22,35 @@ fun ContenidoDrawer(
 ) {
     ModalDrawerSheet {
         // En el commit 6 agregaremos el encabezado del usuario aquí
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.primaryContainer,
+                modifier = Modifier.size(64.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Text("MC", style = MaterialTheme.typography.titleLarge) // Iniciales
+                }
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("Meliton Carbajal", style = MaterialTheme.typography.titleMedium) // Datos del usuario
+            Text("carbajal@tecsup.edu.pe", style = MaterialTheme.typography.bodyMedium)
+        }
+
+        HorizontalDivider(modifier = Modifier.padding(bottom = 8.dp))
+
+        // Destinos de navegacion
+        NavigationDrawerItem(
+            label = { Text("Inicio") },
+            selected = rutaActual == "inicio",
+            onClick = { onNavegar("inicio") },
+            modifier = Modifier.padding(horizontal = 12.dp)
+        )
 
         NavigationDrawerItem(
             label = { Text("Inicio") },
