@@ -6,7 +6,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.launch
 
 @Composable
 fun AppNavegacion() {
@@ -14,12 +16,23 @@ fun AppNavegacion() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
 
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val rutaActual = navBackStackEntry?.destination?.route ?: "inicio"
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ContenidoDrawer(
-                rutaActual = "inicio", // Se hará dinámico en el siguiente commit
-                onNavegar = { /* Pendiente de implementación */ }
+                rutaActual = rutaActual,
+                onNavegar = { ruta ->
+                    navController.navigate(ruta) {
+                        popUpTo(navController.graph.startDestinationId) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                    // Cierra el menú al seleccionar una opción
+                    coroutineScope.launch { drawerState.close() }
+                }
             )
         }
     ) {
