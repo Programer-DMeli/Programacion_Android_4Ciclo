@@ -10,8 +10,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Warning
 
 @Composable
 fun TarjetaProducto(producto: Producto) {
@@ -33,17 +37,18 @@ fun TarjetaProducto(producto: Producto) {
         ) {
             DropdownMenuItem(
                 text = { Text("Favoritos") },
-                onClick = {
-                    // Lógica futura para favoritos
-                    expanded = false
-                }
+                leadingIcon = { Icon(Icons.Default.FavoriteBorder, contentDescription = null) },
+                onClick = { expanded = false }
             )
+            HorizontalDivider()
             DropdownMenuItem(
                 text = { Text("Compartir") },
+                leadingIcon = { Icon(Icons.Default.Share, contentDescription = null) },
                 onClick = { expanded = false }
             )
             DropdownMenuItem(
                 text = { Text("Reportar") },
+                leadingIcon = { Icon(Icons.Default.Warning, contentDescription = null) },
                 onClick = { expanded = false }
             )
         }
