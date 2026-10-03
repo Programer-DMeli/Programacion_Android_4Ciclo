@@ -33,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,8 +57,9 @@ fun TarjetaProducto(
     // Estado para el menú desplegable (DropdownMenu)
     var expanded by remember { mutableStateOf(false) }
 
-    // Estado individual para cambiar el color del ícono del corazón
-    var esFavorito by remember { mutableStateOf(false) }
+    // Estado individual para cambiar el color del ícono de corazón.
+    // Usamos rememberSaveable para que persista ante recomposiciones y cambios de configuración
+    var esFavorito by rememberSaveable { mutableStateOf(false) }
 
     Card(
         modifier = modifier
