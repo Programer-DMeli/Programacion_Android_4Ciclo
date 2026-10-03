@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Share
@@ -25,6 +26,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,6 +37,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -53,7 +56,9 @@ fun TarjetaProducto(
     // Estado para el menú desplegable (DropdownMenu)
     var expanded by remember { mutableStateOf(false) }
 
-    // Tarjeta con borde morado de Material3
+    // Estado individual para cambiar el color del ícono del corazón
+    var esFavorito by remember { mutableStateOf(false) }
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -62,7 +67,7 @@ fun TarjetaProducto(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
         ),
-        border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary), // Borde morado de la tarjeta
+        border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary), // Borde morado
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
@@ -76,7 +81,7 @@ fun TarjetaProducto(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                // Contenedor visual para el ícono del producto
+                // Contenedor visual del producto
                 Box(
                     modifier = Modifier
                         .size(56.dp)
@@ -92,13 +97,27 @@ fun TarjetaProducto(
                     )
                 }
 
-                // Información del producto (Nombre y Precio)
+                // Información del producto (Nombre, Ícono Favorito y Precio)
                 Column {
-                    Text(
-                        text = producto.nombre,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        Text(
+                            text = producto.nombre,
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        // Si el producto está marcado como favorito, muestra un corazón rojo
+                        if (esFavorito) {
+                            Icon(
+                                imageVector = Icons.Default.Favorite,
+                                contentDescription = "Producto Favorito",
+                                tint = Color(0xFFE91E63), // Color de corazón destacado (Rojo/Rosado)
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
+                    }
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = producto.precio,
@@ -108,7 +127,7 @@ fun TarjetaProducto(
                 }
             }
 
-            // Botón de 3 puntos y DropdownMenu desplegable
+            // Menú de opciones
             Box {
                 IconButton(onClick = { expanded = true }) {
                     Icon(
@@ -122,15 +141,22 @@ fun TarjetaProducto(
                     onDismissRequest = { expanded = false }
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Favoritos") },
+                        text = {
+                            Text(
+                                text = if (esFavorito) "Quitar de Favoritos" else "Favoritos",
+                                color = if (esFavorito) Color(0xFFE91E63) else Color.Unspecified
+                            )
+                        },
                         leadingIcon = {
                             Icon(
-                                imageVector = Icons.Default.FavoriteBorder,
-                                contentDescription = null
+                                imageVector = if (esFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                                contentDescription = "Ícono de Favorito",
+                                tint = if (esFavorito) Color(0xFFE91E63) else LocalContentColor.current // Cambia de color el corazón
                             )
                         },
                         onClick = {
                             expanded = false
+                            esFavorito = !esFavorito // Cambia el estado del corazón del producto
                             onAgregarFavorito() // Incrementa el contador mediante State Hoisting
                         }
                     )
